@@ -34,3 +34,8 @@ The Usage is quite simple. Just call the renew.py script with the TLD for which 
 ```
 
 You can run the script monthly. If the certbot-auto returns a `Certificate is not yet due for renewal` the script will stop immediately, otherwise the renewal process is started.
+
+
+# Disclaimer
+
+Even though the scripts are used in production on my system and are tested on a Ubuntu 18.04.02 system I do neither claim correctness nor completeness on these scripts. Use at your own risk!
