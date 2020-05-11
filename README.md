@@ -2,12 +2,12 @@
 
 The provided scripts will auto-renew your Let's Encrypt Wildcard Certificates. For the renewal a DNS Challenge is needed and the certbot-auto asks for a TXT Record named *_acme-challenge* to be set to a random generated string.
 
-The scripts will update the Zone File within the Hetzner Robot Web-GUI to that new string and await the DNS change to take effect before proceeding with the re-issuing of the certificates.
+The scripts will update the Zone File within the Hetzner DNS to that new string and await the DNS change to take effect before proceeding with the re-issuing of the certificates.
 
 ## Prerequisites
 
 - Python 3.7+
-- certbot-auto
+- certbot-auto / certbot
 
 ## Installation
 
@@ -19,18 +19,15 @@ $ pip3 install -r requirements.txt
 
 ## Configuration
 
-The scripts need to know your login data and the installation path of certbot-auto to function correctly. The Installation Path to certbot-auto has to be set in the `certbot.py` file. Just edit the `CERTBOT_AUTO` global variable.
-
-The credentials for the Hetzner Robot can be set in the function auth within the `hetzner.py` file. Simply replace `YOUR-HETZNER-USER` and `YOUR-HETZNER-PASS` with your details.
-
-
+The script is using Hetzner DNS API, so only thing you should provide is token (edit hetzner.py and set global variable `TOKEN`). You can generate new token at https://dns.hetzner.com/settings/api-token
+Beside token please check installation path of certbot/certbot-auto at your system to function correctly. The Installation Path to certbot has to be set in the `certbot.py` file. Just edit the `CERTBOT_PATH` global variable.
 
 ## Usage
 
 The Usage is quite simple. Just call the renew.py script with the TLD for which the Zone-File needs to be updated, i.e. the TLD the certificate is due for renewal. In my setup for example I have the following cronjob active
 
 ```
-@monthly /root/.virtualenvs/hetzner/bin/python /opt/hetzner/renew.py macskay.com
+@monthly /root/.virtualenvs/hetzner/bin/python /opt/hetzner/renew.py example.com
 ```
 
 You can run the script monthly. If the certbot-auto returns a `Certificate is not yet due for renewal` the script will stop immediately, otherwise the renewal process is started.
