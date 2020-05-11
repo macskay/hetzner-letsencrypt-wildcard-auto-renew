@@ -27,7 +27,7 @@ Beside token please check installation path of certbot/certbot-auto at your syst
 The Usage is quite simple. Just call the renew.py script with the TLD for which the Zone-File needs to be updated, i.e. the TLD the certificate is due for renewal. In my setup for example I have the following cronjob active
 
 ```
-@monthly HETZNER_TOKEN=x CERTBOT_PATH=/opt/certbot/certbot-auto /root/.virtualenvs/hetzner/bin/python /opt/hetzner/renew.py example.com
+@monthly HETZNER_TOKEN=x CERTBOT_PATH=/opt/certbot/certbot-auto /root/.virtualenvs/hetzner/bin/python /opt/hetzner/renew.py example.com && apache2ctl graceful
 ```
 
 You can run the script monthly. If the certbot-auto returns a `Certificate is not yet due for renewal` the script will stop immediately, otherwise the renewal process is started.
