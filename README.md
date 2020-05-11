@@ -19,15 +19,15 @@ $ pip3 install -r requirements.txt
 
 ## Configuration
 
-The script is using Hetzner DNS API, so only thing you should provide is token (edit hetzner.py and set global variable `TOKEN`). You can generate new token at https://dns.hetzner.com/settings/api-token
-Beside token please check installation path of certbot/certbot-auto at your system to function correctly. The Installation Path to certbot has to be set in the `certbot.py` file. Just edit the `CERTBOT_PATH` global variable.
+The script is using Hetzner DNS API, so only thing you should provide is token (assign it to `HETZNER_TOKEN` environment variable). You can generate new token at https://dns.hetzner.com/settings/api-token
+Beside token please check installation path of certbot/certbot-auto at your system to function correctly set `HETZNER_TOKEN` environment variable.
 
 ## Usage
 
 The Usage is quite simple. Just call the renew.py script with the TLD for which the Zone-File needs to be updated, i.e. the TLD the certificate is due for renewal. In my setup for example I have the following cronjob active
 
 ```
-@monthly /root/.virtualenvs/hetzner/bin/python /opt/hetzner/renew.py example.com
+@monthly HETZNER_TOKEN=x CERTBOT_PATH=/opt/certbot/certbot-auto /root/.virtualenvs/hetzner/bin/python /opt/hetzner/renew.py example.com
 ```
 
 You can run the script monthly. If the certbot-auto returns a `Certificate is not yet due for renewal` the script will stop immediately, otherwise the renewal process is started.

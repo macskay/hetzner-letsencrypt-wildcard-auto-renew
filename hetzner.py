@@ -1,8 +1,9 @@
+import os
 import requests
 import json
 
 BASE_URL = "https://dns.hetzner.com/api/v1"
-TOKEN = "xxx"
+TOKEN = os.environ['HETZNER_TOKEN']
 
 def get_zone(domain):
     try:

@@ -1,10 +1,11 @@
+import os
 import sys
 import pexpect
 import hetzner
 import time
 import subprocess
 
-CERTBOT_PATH = "/usr/bin/certbot"
+CERTBOT_PATH = os.environ['CERTBOT_PATH']
 
 def get_acme_challenge(domain):
     return subprocess.check_output(["dig", "-t", "txt", f"_acme-challenge.{domain}", "+short"]).decode("utf-8").replace('"', '')

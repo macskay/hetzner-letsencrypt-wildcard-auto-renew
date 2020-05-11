@@ -4,8 +4,8 @@ import sys
 import os
 
 def main():
+    print("Let's Encrypt Wildcard Auto-Renewal with Hetzner\n")
     if (len(sys.argv) != 2):
-        print("Let's Encrypt Wildcard Auto-Renewal with Hetzner\n")
         print("Domain name is missing\n")
         print("Usage: python renew.py example.com")
         exit()
