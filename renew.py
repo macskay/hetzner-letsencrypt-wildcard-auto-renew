@@ -1,23 +1,19 @@
 import hetzner
 import certbot
-import requests
 import sys
-import dns.resolver
-import subprocess
 import os
 
 def main():
+    if (len(sys.argv) != 2):
+        print("Let's Encrypt Wildcard Auto-Renewal with Hetzner\n")
+        print("Domain name is missing\n")
+        print("Usage: python renew.py example.com")
+        exit()
     domain = sys.argv[1]
-    session = requests.session()
-    res = hetzner.login(session)
-    id = hetzner.get_zone_id(session, domain)
-
-    zone = hetzner.get_zone(session, id)
-    certbot.renew(session, zone, id, domain)
-
+    zone = hetzner.get_zone(domain)
+    record = hetzner.get_acme_record(zone)
+    certbot.renew(zone, record, domain)
     os.system("apache2ctl gracfeul")
-
 
 if __name__ == "__main__":
     main()
-
