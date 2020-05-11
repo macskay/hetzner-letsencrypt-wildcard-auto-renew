@@ -13,7 +13,7 @@ def main():
     zone = hetzner.get_zone(domain)
     record = hetzner.get_acme_record(zone)
     certbot.renew(zone, record, domain)
-    os.system("apache2ctl gracfeul")
+    os.system("apache2ctl graceful")
 
 if __name__ == "__main__":
     main()
