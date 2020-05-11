@@ -11,7 +11,7 @@ def get_acme_challenge(domain):
 def renew(zone, record, domain, cetbot_path):
     record = hetzner.get_acme_record(zone)
     old = record["value"]
-    child = pexpect.spawn(f"/bin/bash -c {cetbot_path} certonly -d *.{domain} --server https://acme-v02.api.letsencrypt.org/directory --manual --preferred-challenges dns --manual-public-ip-logging-ok", encoding="utf-8")
+    child = pexpect.spawn(f"/bin/bash -c '{cetbot_path} certonly -d *.{domain} --server https://acme-v02.api.letsencrypt.org/directory --manual --preferred-challenges dns --manual-public-ip-logging-ok'", encoding="utf-8")
     child.logfile_read = sys.stdout
 
     ex = child.expect(["Before continuing", "Cert not yet due for renewal"])
