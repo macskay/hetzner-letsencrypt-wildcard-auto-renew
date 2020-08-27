@@ -15,7 +15,7 @@ def main():
     zone = hetzner.get_zone(session, id)
     certbot.renew(session, zone, id, domain)
 
-    os.system("apache2ctl gracfeul")
+    os.system("apache2ctl graceful")
 
 
 if __name__ == "__main__":
