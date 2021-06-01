@@ -9,5 +9,5 @@ pudb==2018.1
 Pygments==2.3.1
 requests==2.21.0
 soupsieve==1.9
-urllib3==1.24.1
+urllib3==1.26.5
 urwid==2.0.1
